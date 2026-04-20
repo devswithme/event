@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryMode = exports.SortOrder = exports.TicketScalarFieldEnum = exports.PackageScalarFieldEnum = exports.EventScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.QueryMode = exports.SortOrder = exports.PromoCodeScalarFieldEnum = exports.PackageScalarFieldEnum = exports.EventScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -77,7 +77,7 @@ exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
     Event: 'Event',
     Package: 'Package',
-    Ticket: 'Ticket'
+    PromoCode: 'PromoCode'
 };
 /*
  * Enums
@@ -102,11 +102,13 @@ exports.PackageScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
-exports.TicketScalarFieldEnum = {
+exports.PromoCodeScalarFieldEnum = {
     id: 'id',
-    invitationLink: 'invitationLink',
-    status: 'status',
+    code: 'code',
     packageId: 'packageId',
+    discountPct: 'discountPct',
+    quota: 'quota',
+    usedCount: 'usedCount',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };

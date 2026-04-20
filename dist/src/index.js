@@ -49,11 +49,21 @@ app.post("/checkout/:packageId", async (c) => {
     if (!email) {
         return c.json({ error: "Email is required" }, 400);
     }
+    let finalPrice = pkg.price;
+    const promoCodeRaw = body["promoCode"];
+    const promoCode = typeof promoCodeRaw === "string" ? promoCodeRaw.trim().toUpperCase() : "";
+    if (promoCode) {
+        const claimed = await eventModel.claimPromoCode(promoCode, packageId);
+        if (!claimed) {
+            return c.json({ error: "Promo code is invalid, not applicable, or quota exhausted" }, 400);
+        }
+        finalPrice = Math.round(pkg.price * (1 - claimed.discountPct / 100));
+    }
     let invoice;
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const nanoid = (0, nanoid_1.customAlphabet)(alphabet, 5);
     const data = {
-        amount: pkg.price,
+        amount: finalPrice,
         externalId: `E-${nanoid()}`,
         successRedirectUrl: "https://discord.com/invite/7FBpTEXqVj",
         payerEmail: email,
@@ -61,7 +71,7 @@ app.post("/checkout/:packageId", async (c) => {
         items: [
             {
                 name: `${pkg.event.name} (${pkg.name})`,
-                price: pkg.price,
+                price: finalPrice,
                 quantity: 1,
             },
         ],
@@ -81,5 +91,10 @@ app.post("/checkout/:packageId", async (c) => {
         });
     }
     return c.redirect(invoice.invoiceUrl);
+});
+app.get("/promo-codes", async (c) => {
+    const packageId = c.req.query("packageId");
+    const codes = await eventModel.listPromoCodes(packageId);
+    return c.json(codes);
 });
 exports.default = app;

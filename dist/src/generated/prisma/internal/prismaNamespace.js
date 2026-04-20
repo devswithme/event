@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.QueryMode = exports.SortOrder = exports.TicketScalarFieldEnum = exports.PackageScalarFieldEnum = exports.EventScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.QueryMode = exports.SortOrder = exports.PromoCodeScalarFieldEnum = exports.PackageScalarFieldEnum = exports.EventScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 /**
  * Prisma Errors
@@ -105,7 +105,7 @@ exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
     Event: 'Event',
     Package: 'Package',
-    Ticket: 'Ticket'
+    PromoCode: 'PromoCode'
 };
 /**
  * Enums
@@ -130,11 +130,13 @@ exports.PackageScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
-exports.TicketScalarFieldEnum = {
+exports.PromoCodeScalarFieldEnum = {
     id: 'id',
-    invitationLink: 'invitationLink',
-    status: 'status',
+    code: 'code',
     packageId: 'packageId',
+    discountPct: 'discountPct',
+    quota: 'quota',
+    usedCount: 'usedCount',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
